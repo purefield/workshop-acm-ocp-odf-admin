@@ -1,0 +1,19 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: dashboard
+  namespace: lab-ocp-cns
+  labels:
+    app: dashboard
+spec:
+  ports:
+    - name: 10080-tcp
+      protocol: TCP
+      port: 10080
+      targetPort: 10080
+  selector:
+    app: dashboard
+    deploymentconfig: dashboard
+  type: ClusterIP
+  sessionAffinity: None

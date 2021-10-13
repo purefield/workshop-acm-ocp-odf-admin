@@ -1,0 +1,20 @@
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: dashboard
+  namespace: lab-ocp-cns
+  labels:
+    app: dashboard
+spec:
+  lookupPolicy:
+    local: true
+  tags:
+    - name: latest
+      from:
+        kind: DockerImage
+        name: 'quay.io/geoallen/lab-sample-workshop:ocp4-dev'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Source

@@ -1,0 +1,114 @@
+---
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: dashboard
+  namespace: lab-ocp-cns
+  labels:
+    app: dashboard
+spec:
+  strategy:
+    type: Recreate
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - terminal
+        from:
+          kind: ImageStreamTag
+          namespace: lab-ocp-cns
+          name: 'dashboard:latest'
+        lastTriggeredImage: >-
+          quay.io/geoallen/lab-sample-workshop@sha256:391f7ed8e661278c6ef45df7052f864331f9cc1c2a2a2bcdbcc71a5ee87f617f
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: dashboard
+    deploymentconfig: dashboard
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dashboard
+        deploymentconfig: dashboard
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+    spec:
+      restartPolicy: Always
+      serviceAccountName: dashboard-user
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      securityContext: {}
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: terminal
+          env:
+            - name: PROJECT_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: APPLICATION_NAME
+              value: dashboard
+            - name: CONFIGURATION_TYPE
+              value: cluster-admin
+            - name: AUTH_USERNAME
+            - name: AUTH_PASSWORD
+              value: w2StlwjJKEyUUIbx
+            - name: CLUSTER_SUBDOMAIN
+            - name: OPENSHIFT_PROJECT
+            - name: OAUTH_SERVICE_ACCOUNT
+              value: dashboard-user
+            - name: DOWNLOAD_URL
+            - name: WORKSHOP_FILE
+            - name: CONSOLE_URL
+              value: 'http://0.0.0.0:10083'
+            - name: OC_VERSION
+            - name: ODO_VERSION
+            - name: KUBECTL_VERSION
+          ports:
+            - containerPort: 10080
+              protocol: TCP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: envvars
+              mountPath: /opt/workshop/envvars
+          terminationMessagePolicy: File
+          image: >-
+            quay.io/geoallen/lab-sample-workshop@sha256:391f7ed8e661278c6ef45df7052f864331f9cc1c2a2a2bcdbcc71a5ee87f617f
+        - name: console
+          image: 'quay.io/openshift/origin-console:latest'
+          command:
+            - /opt/bridge/bin/bridge
+          env:
+            - name: BRIDGE_K8S_MODE
+              value: in-cluster
+            - name: BRIDGE_LISTEN
+              value: 'http://0.0.0.0:10083'
+            - name: BRIDGE_BASE_PATH
+              value: /console/
+            - name: BRIDGE_PUBLIC_DIR
+              value: /opt/bridge/static
+            - name: BRIDGE_USER_AUTH
+              value: disabled
+            - name: BRIDGE_BRANDING
+              value: openshift
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      serviceAccount: dashboard-user
+      volumes:
+        - name: envvars
+          configMap:
+            name: dashboard-env
+            defaultMode: 420
+      dnsPolicy: ClusterFirst
