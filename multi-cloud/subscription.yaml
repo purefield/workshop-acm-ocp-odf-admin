@@ -1,0 +1,17 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: secrets
+  namespace: workshop-ocp-odf-admin
+  labels:
+    workshop: ocp-odf-admin
+spec:
+  channel: workshop-ocp-odf-admin/secrets
+  packageFilter:
+    annotations:
+      secretgroup: workshop-secret
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: placement-workshop-ocp-odf-admin

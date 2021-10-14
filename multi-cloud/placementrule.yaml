@@ -1,0 +1,16 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-workshop-ocp-odf-admin
+  namespace: workshop-ocp-odf-admin
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - key: workshop
+        operator: In
+        values:
+          - ocp-odf-admin

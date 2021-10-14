@@ -1,0 +1,10 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: secrets
+  namespace: workshop-ocp-odf-admin
+spec:
+  type: Namespace
+  sourceNamespaces:
+    - workshop-ocp-odf-admin
