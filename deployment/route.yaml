@@ -7,7 +7,7 @@ metadata:
   labels:
     app: dashboard
 spec:
-  host: dashboard-lab-ocp-cns.apps
+  subdomain: dashboard-lab-ocp-cns
   to:
     kind: Service
     name: dashboard
