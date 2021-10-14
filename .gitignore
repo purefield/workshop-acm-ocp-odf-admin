@@ -1,2 +1,3 @@
 *.user*.yaml
-*.tmpl.yaml
+*.log
+*.all
