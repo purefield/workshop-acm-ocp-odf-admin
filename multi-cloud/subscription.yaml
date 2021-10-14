@@ -3,7 +3,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
   name: secrets
-  namespace: openshift-config
+  namespace: workshop-ocp-odf-admin
   labels:
     workshop: ocp-odf-admin
 spec:
