@@ -6,6 +6,17 @@ metadata:
   namespace: workshop-ocp-odf-admin
 spec:
   type: Namespace
-  pathname: workshop-ocp-odf-admin
+  pathname: openshift-config
   sourceNamespaces:
     - workshop-ocp-odf-admin
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  annotations:
+    apps.open-cluster-management.io/reconcile-rate: low
+  name: dashboard
+  namespace: workshop-ocp-odf-admin
+spec:
+  type: Git
+  pathname: 'https://github.com/purefield/workshop-acm-ocp-odf-admin.git'
