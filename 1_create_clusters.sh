@@ -1,6 +1,6 @@
 . /srv/login.sh
 oc-login 1
-for id in $(seq -w 01 1); do
+for id in $(seq -w 01 2); do
   name=user$id
   yaml=odf-cluster.$name.yaml
   config=$(perl -pe "s/adminlab/$name/g" install-config.yaml.tmpl | base64 -w0)
