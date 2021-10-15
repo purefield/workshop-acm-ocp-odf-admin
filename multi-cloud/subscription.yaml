@@ -5,7 +5,7 @@ metadata:
   name: secrets
   namespace: openshift-config
   labels:
-    workshop: ocp-odf-admin
+    lab: ocp-cns
 spec:
   channel: lab-ocp-cns/secrets
   packageFilter:
@@ -25,7 +25,7 @@ metadata:
     apps.open-cluster-management.io/reconcile-rate: "off"
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
-    workshop: ocp-odf-admin
+    lab: ocp-cns
   name: dashboard
   namespace: lab-ocp-cns
 spec:

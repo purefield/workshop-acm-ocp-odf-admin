@@ -17,5 +17,5 @@ for id in $(seq -w 01 3); do
     perl -pe 's/DOCKER_CONFIG_JSON.$/`cat dockerconfig.json`/se' |
     perl -pe "s/(\s+install-config.yaml\:\s*).*$/\$1$config/" > $yaml
     oc apply -f $yaml
-    oc label ManagedCluster --overwrite=true -l name=$name workshop=ocp-odf-admin
+    oc label ManagedCluster --overwrite=true -l name=$name lab=ocp-cns
 done

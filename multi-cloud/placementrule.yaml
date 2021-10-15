@@ -10,7 +10,23 @@ spec:
     type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - key: workshop
+      - key: lab
         operator: In
         values:
-          - ocp-odf-admin
+          - ocp-cns
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-lab-ocp-cns
+  namespace: openshift-config
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - key: lab
+        operator: In
+        values:
+          - ocp-cns
