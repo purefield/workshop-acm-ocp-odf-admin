@@ -3,14 +3,14 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
   name: secrets
-  namespace: lab-ocp-cns
+  namespace: openshift-config
   labels:
     workshop: ocp-odf-admin
 spec:
   channel: lab-ocp-cns/secrets
   packageFilter:
     annotations:
-      secretgroup: workshop-secret
+      secretname: htpass-secret
   placement:
     placementRef:
       kind: PlacementRule
