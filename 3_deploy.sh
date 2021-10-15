@@ -10,5 +10,6 @@ for cluster in $(oc get ManagedCluster -o name | cut -d\/ -f2 | sort -n | egrep 
   base_url="$cluster.$(oc get ClusterDeployment -n $cluster -o=jsonpath='{.items[0].spec.baseDomain}')"
   perl -pe "s/\{BASE_URL\}/$base_url/g" dashboard-secrets.yaml.tmpl |
     perl -pe "s/\{CLUSTER_NAME\}/$cluster/g" |
-    perl -pe "s/\{KUBEADMIN_PASSWORD\}/$secret/g" | oc apply -f -
+    perl -pe "s/\{KUBEADMIN_PASSWORD\}/$secret/g" |
+    perl -pe "s/(\w--)/\\\\\\\\\$1/g" | oc apply -f -
 done
