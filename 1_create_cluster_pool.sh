@@ -1,12 +1,12 @@
+export $(cat secrets.env)
+export size=5
+export name=lab-ocp-cns-davita
+export namespace=lab-ocp-cns
+export label='lab: ocp-cns'
 . /srv/login.sh
 oc-login 1
 rm workshop_id_rsa* -f
 ssh-keygen -qP '' -C 'workshop-root' -f workshop_id_rsa
-export $(cat secrets.env)
-export size=1
-export name=lab-ocp-cns-davita
-export namespace=lab-ocp-cns
-export label='lab: ocp-cns'
 yaml=clusters.$name.yaml
 config=$(perl -pe "s/adminlab/$name/g" install-config.yaml.tmpl | 
   perl -pe 's/SSH_PUB_KEY/`cat workshop_id_rsa.pub | perl -pe "s|\n||g"`/e' |
