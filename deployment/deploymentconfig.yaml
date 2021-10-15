@@ -108,7 +108,7 @@ spec:
       serviceAccount: dashboard-user
       volumes:
         - name: envvars
-          configMap:
+          secret:
             name: dashboard-env
             defaultMode: 420
       dnsPolicy: ClusterFirst
