@@ -3,18 +3,18 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
   name: secrets
-  namespace: workshop-ocp-odf-admin
+  namespace: lab-ocp-cns
   labels:
     workshop: ocp-odf-admin
 spec:
-  channel: workshop-ocp-odf-admin/secrets
+  channel: lab-ocp-cns/secrets
   packageFilter:
     annotations:
       secretgroup: workshop-secret
   placement:
     placementRef:
       kind: PlacementRule
-      name: placement-workshop-ocp-odf-admin
+      name: placement-lab-ocp-cns
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
@@ -27,10 +27,10 @@ metadata:
   labels:
     workshop: ocp-odf-admin
   name: dashboard
-  namespace: workshop-ocp-odf-admin
+  namespace: lab-ocp-cns
 spec:
-  channel: workshop-ocp-odf-admin/dashboard
+  channel: lab-ocp-cns/dashboard
   placement:
     placementRef:
       kind: PlacementRule
-      name: placement-workshop-ocp-odf-admin
+      name: placement-lab-ocp-cns

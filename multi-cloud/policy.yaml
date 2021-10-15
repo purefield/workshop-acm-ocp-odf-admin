@@ -2,8 +2,8 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
-  name: policy-workshop-ocp-odf-admin-auth
-  namespace: workshop-ocp-odf-admin
+  name: policy-lab-ocp-cns-auth
+  namespace: lab-ocp-cns
   annotations:
     policy.open-cluster-management.io/standards: NIST-CSF
     policy.open-cluster-management.io/categories: PR.AC Identity Management and Access Control
@@ -16,7 +16,7 @@ spec:
       apiVersion: policy.open-cluster-management.io/v1
       kind: ConfigurationPolicy
       metadata:
-        name: policy-workshop-ocp-odf-admin-auth-provider
+        name: policy-lab-ocp-cns-auth-provider
       spec:
         remediationAction: enforce
         severity: low
@@ -45,12 +45,12 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-namespace
-  namespace: workshop-ocp-odf-admin
+  namespace: lab-ocp-cns
 placementRef:
-  name: placement-workshop-ocp-odf-admin
+  name: placement-lab-ocp-cns
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
-- name: policy-workshop-ocp-odf-admin-auth
+- name: policy-lab-ocp-cns-auth
   kind: Policy
   apiGroup: policy.open-cluster-management.io

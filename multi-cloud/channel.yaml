@@ -3,12 +3,12 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
   name: secrets
-  namespace: workshop-ocp-odf-admin
+  namespace: lab-ocp-cns
 spec:
   type: Namespace
   pathname: openshift-config
   sourceNamespaces:
-    - workshop-ocp-odf-admin
+    - lab-ocp-cns
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
@@ -16,7 +16,7 @@ metadata:
   annotations:
     apps.open-cluster-management.io/reconcile-rate: low
   name: dashboard
-  namespace: workshop-ocp-odf-admin
+  namespace: lab-ocp-cns
 spec:
   type: Git
   pathname: 'https://github.com/purefield/workshop-acm-ocp-odf-admin.git'

@@ -2,8 +2,8 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: placement-workshop-ocp-odf-admin
-  namespace: workshop-ocp-odf-admin
+  name: placement-lab-ocp-cns
+  namespace: lab-ocp-cns
 spec:
   clusterConditions:
   - status: "True"
