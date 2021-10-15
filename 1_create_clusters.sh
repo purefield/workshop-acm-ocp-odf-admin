@@ -3,7 +3,7 @@ oc-login 1
 rm workshop_id_rsa* -f
 ssh-keygen -qP '' -C 'workshop-root' -f workshop_id_rsa
 export $(cat secrets.env)
-for id in $(seq -w 01 2); do
+for id in $(seq -w 01 3); do
   name=user$id
   yaml=odf-cluster.$name.yaml
   config=$(perl -pe "s/adminlab/$name/g" install-config.yaml.tmpl | 
