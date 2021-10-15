@@ -1,3 +1,6 @@
 *.user*.yaml
 *.log
 *.all
+secrets.env
+dockerconfig.json
+workshop_id_rsa*
