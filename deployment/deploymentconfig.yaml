@@ -109,6 +109,6 @@ spec:
       volumes:
         - name: envvars
           secret:
-            name: dashboard-env
+            secretName: dashboard-env
             defaultMode: 420
       dnsPolicy: ClusterFirst
