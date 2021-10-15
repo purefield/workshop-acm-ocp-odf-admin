@@ -1,0 +1,65 @@
+apiVersion: hive.openshift.io/v1
+kind: ClusterPool
+metadata:
+  name: NAMESPACE
+  namespace: NAMESPACE
+  labels:
+    cloud: 'AWS'
+    region: 'us-east-2'
+    vendor: 'OpenShift'
+    LABEL
+spec:
+  size: POOL_SIZE
+  baseDomain: BASE_DOMAIN
+  installConfigSecretTemplateRef:
+    name: POOL_NAME-install-config
+  imageSetRef:
+     #quay.io/openshift-release-dev/ocp-release:4.7.33-x86_64
+    name: img4.7.33-x86-64-appsub
+  pullSecretRef:
+    name: POOL_NAME-pull-secret
+  platform:
+    aws:
+      credentialsSecretRef:
+        name: POOL_NAME-aws-creds
+      region: us-east-2
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: POOL_NAME-pull-secret
+  namespace: NAMESPACE
+stringData:
+  .dockerconfigjson: |-
+    DOCKER_CONFIG_JSON
+type: kubernetes.io/dockerconfigjson
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: POOL_NAME-install-config
+  namespace: NAMESPACE
+type: Opaque
+data:
+  # Base64 encoding of install-config yaml
+  install-config.yaml: INSTALL_CONFIG
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: POOL_NAME-ssh-private-key
+  namespace: NAMESPACE
+stringData:
+  ssh-privatekey: |-
+SSH_PRIVATE_KEY
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: POOL_NAME-aws-creds
+  namespace: NAMESPACE
+stringData:
+  aws_access_key_id: AWS_ACCESS_KEY_ID
+  aws_secret_access_key: AWS_SECRET_ACCESS_KEY

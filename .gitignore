@@ -1,4 +1,5 @@
 *.user*.yaml
+clusters.*.yaml
 *.log
 *.all
 secrets.env
