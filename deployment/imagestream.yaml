@@ -13,7 +13,7 @@ spec:
     - name: latest
       from:
         kind: DockerImage
-        name: 'quay.io/geoallen/lab-sample-workshop:latest'
+        name: 'quay.io/geoallen/lab-ocp-cns:latest'
       generation: 2
       importPolicy: {}
       referencePolicy:

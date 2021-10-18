@@ -3,7 +3,7 @@ oc-login 1
 rm workshop_id_rsa* -f
 ssh-keygen -qP '' -C 'workshop-root' -f workshop_id_rsa
 export $(cat secrets.env)
-export size=1
+export size=5
 export infra_nodes=3
 export worker_nodes=2
 export label='lab: ocp-cns'
