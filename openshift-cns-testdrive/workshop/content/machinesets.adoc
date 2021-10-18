@@ -1,7 +1,5 @@
 ## MachineSets, Machines, and Nodes
 
-{{ CLUSTER_NAME }}
-
 Kubernetes `Nodes` are where containers are orchestrated and run in `Pods`.
 OpenShift 4 is fundamentally different than OpenShift 3 with respect to its
 focus on automated operations through the use of `Operators`. With respect
@@ -31,9 +29,9 @@ You will see something like:
 
 ----
 NAME                                   DESIRED   CURRENT   READY   AVAILABLE   AGE
-cluster-f4a3-lpxbs-worker-us-east-2a   1         1         1       1           47h
-cluster-f4a3-lpxbs-worker-us-east-2b   1         1         1       1           47h
-cluster-f4a3-lpxbs-worker-us-east-2c   1         1         1       1           47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-worker-us-east-2a   1         1         1       1           47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-worker-us-east-2b   1         1         1       1           47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-worker-us-east-2c   1         1         1       1           47h
 ----
 
 When OpenShift was installed, the installer interrogated the cloud provider
@@ -52,12 +50,12 @@ You will see something like:
 
 ----
 NAME                                         INSTANCE              STATE     TYPE         REGION      ZONE         AGE
-cluster-f4a3-lpxbs-master-0                  i-04280885cafad3130   running   m4.xlarge    us-east-2   us-east-2a   47h
-cluster-f4a3-lpxbs-master-1                  i-0def910edcae51d11   running   m4.xlarge    us-east-2   us-east-2b   47h
-cluster-f4a3-lpxbs-master-2                  i-0beb5e40214d706fc   running   m4.xlarge    us-east-2   us-east-2c   47h
-cluster-f4a3-lpxbs-worker-us-east-2a-b94pr   i-0a922c0fe765caa3c   running   m5.2xlarge   us-east-2   us-east-2a   47h
-cluster-f4a3-lpxbs-worker-us-east-2b-m8gbx   i-0fb8d960b8a3a3343   running   m5.2xlarge   us-east-2   us-east-2b   47h
-cluster-f4a3-lpxbs-worker-us-east-2c-5tmg7   i-0151c72cd85f85038   running   m5.2xlarge   us-east-2   us-east-2c   47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-master-0                  i-04280885cafad3130   running   m4.xlarge    us-east-2   us-east-2a   47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-master-1                  i-0def910edcae51d11   running   m4.xlarge    us-east-2   us-east-2b   47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-master-2                  i-0beb5e40214d706fc   running   m4.xlarge    us-east-2   us-east-2c   47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-worker-us-east-2a-b94pr   i-0a922c0fe765caa3c   running   m5.2xlarge   us-east-2   us-east-2a   47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-worker-us-east-2b-m8gbx   i-0fb8d960b8a3a3343   running   m5.2xlarge   us-east-2   us-east-2b   47h
+{{ CLUSTER_NAME }}-ab12-lpxbs-worker-us-east-2c-5tmg7   i-0151c72cd85f85038   running   m5.2xlarge   us-east-2   us-east-2c   47h
 ----
 
 Each `Machine` has a corresponding `INSTANCE`. Do those IDs look familiar?
@@ -135,7 +133,7 @@ You probably already have a new entry for a `Machine` with a `STATE` of
 and will look something like:
 
 ----
-cluster-f4a3-lpxbs-worker-us-east-2c-h7gdt   i-0b9208ec47f0e206b   running   m5.2xlarge     us-east-2   us-east-2c   47s
+{{ CLUSTER_NAME }}-ab12-lpxbs-worker-us-east-2c-h7gdt   i-0b9208ec47f0e206b   running   m5.2xlarge     us-east-2   us-east-2c   47s
 ----
 
 At this point, in the background, the bootstrap process is happening

@@ -357,7 +357,7 @@ status:
   - lastTransitionTime: 2019-04-08T14:47:14Z
     status: "True"
     type: Available
-  domain: apps.cluster-f4a3.f4a3.openshiftworkshop.com
+  domain: apps.{{ CLUSTER_NAME }}-ab12.f4a3.openshiftworkshop.com
   endpointPublishingStrategy:
     type: LoadBalancerService
   selector: ingress.operator.openshift.io/ingress-controller-deployment=default
