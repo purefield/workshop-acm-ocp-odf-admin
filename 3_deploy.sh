@@ -1,4 +1,4 @@
-prefix=lab-ocp-cns-
+prefix='(lab-ocp-cns-|user)'
 home=$( cd "$(dirname "$BASH_SOURCE")" ; pwd -P )
 . /srv/login.sh
 oc-login 1
