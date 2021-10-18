@@ -1,5 +1,7 @@
 ## MachineSets, Machines, and Nodes
 
+{{ CLUSTER_NAME }}
+
 Kubernetes `Nodes` are where containers are orchestrated and run in `Pods`.
 OpenShift 4 is fundamentally different than OpenShift 3 with respect to its
 focus on automated operations through the use of `Operators`. With respect
