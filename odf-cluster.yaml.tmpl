@@ -30,8 +30,7 @@ spec:
     sshPrivateKeySecretRef:
       name: CLUSTERNAME-ssh-private-key
     imageSetRef:
-       #quay.io/openshift-release-dev/ocp-release:4.7.32-x86_64
-      name: img4.7.32-x86-64-appsub
+      name: img4.7.33-x86-64-appsub
   pullSecretRef:
     name: CLUSTERNAME-pull-secret
 ---
@@ -81,7 +80,7 @@ spec:
         iops: 2000
         size: 100
         type: io1
-      type: i3en.2xlarge
+      type: i3.2xlarge
   replicas: INFRA_NODES
 ---
 apiVersion: v1
