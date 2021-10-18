@@ -8,6 +8,9 @@ metadata:
   annotations:
     openshift.io/generated-by: OpenShiftNewApp
 subjects:
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: 'htpasswd:admin'
   - kind: ServiceAccount
     name: dashboard-user
     namespace: lab-ocp-cns
@@ -15,4 +18,3 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-admin
-
