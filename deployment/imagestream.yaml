@@ -14,7 +14,6 @@ spec:
       from:
         kind: DockerImage
         name: 'quay.io/geoallen/lab-ocp-cns:latest'
-      generation: 2
-      importPolicy: {}
+      importPolicy: {scheduled: true}
       referencePolicy:
         type: Source
