@@ -45,7 +45,7 @@ This will allow you to follow along with some of the following discussion.
 
 [source,bash,role="copypaste copypaste-warning"]
 ----
-oc get machineset -n openshift-machine-api -o yaml cluster-5fa6-hx2ml-worker-us-east-2c
+oc get machineset -n openshift-machine-api -o yaml {{ CLUSTER_NAME }}-ab12-hx2ml-worker-us-east-2c
 ----
 
 #### Metadata
