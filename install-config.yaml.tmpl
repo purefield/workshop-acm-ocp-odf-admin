@@ -5,7 +5,7 @@ baseDomain: amz.box--eng.com
 controlPlane:
   hyperthreading: Enabled
   name: master
-  replicas: 3
+  replicas: INFRA_NODES
   platform:
     aws:
       rootVolume:
@@ -16,7 +16,7 @@ controlPlane:
 compute:
 - hyperthreading: Enabled
   name: 'worker'
-  replicas: 3
+  replicas: WORKER_NODES
   platform:
     aws:
       rootVolume:

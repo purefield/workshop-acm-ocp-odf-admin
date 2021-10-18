@@ -3,10 +3,15 @@ oc-login 1
 rm workshop_id_rsa* -f
 ssh-keygen -qP '' -C 'workshop-root' -f workshop_id_rsa
 export $(cat secrets.env)
-for id in $(seq -w 01 3); do
+export size=2
+export infra_nodes=3
+export worker_nodes=2
+for id in $(seq -w 01 $size); do
   name=user$id
   yaml=odf-cluster.$name.yaml
   config=$(perl -pe "s/adminlab/$name/g" install-config.yaml.tmpl | 
+    perl -pe "s/INFRA_NODES/$infra_nodes/g" |
+    perl -pe "s/WORKER_NODES/$worker_nodes/g" |
     perl -pe 's/SSH_PUB_KEY/`cat workshop_id_rsa.pub | perl -pe "s|\n||g"`/e' |
     base64 -w0)
   perl -pe "s/adminlab/$name/g" odf-cluster.yaml.tmpl |
