@@ -81,26 +81,8 @@ spec:
         iops: 2000
         size: 100
         type: io1
-      type: i3.2xlarge  # 8 vCPU, 61  GiB RAM - Storage Optimized
-  replicas: INFRA_NODES
----
-apiVersion: hive.openshift.io/v1
-kind: MachinePool
-metadata:
-  name: CLUSTERNAME-infra
-  namespace: 'CLUSTERNAME'
-spec:
-  clusterDeploymentRef:
-    name: 'CLUSTERNAME'
-  name: infra
-  platform:
-    aws:
-      rootVolume:
-        iops: 2000
-        size: 100
-        type: io1
       type: i3en.2xlarge
-  replicas: 0
+  replicas: INFRA_NODES
 ---
 apiVersion: v1
 kind: Secret
