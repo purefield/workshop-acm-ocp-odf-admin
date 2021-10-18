@@ -13,7 +13,7 @@ spec:
     - name: development
       from:
         kind: DockerImage
-        name: 'quay.io/geoallen/lab-ocp-cns:1.1'
+        name: 'quay.io/geoallen/lab-ocp-cns:1.2'
       importPolicy: {scheduled: true}
       referencePolicy:
         type: Source
