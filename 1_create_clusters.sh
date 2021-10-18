@@ -5,7 +5,7 @@ ssh-keygen -qP '' -C 'workshop-root' -f workshop_id_rsa
 export $(cat secrets.env)
 export size=5
 export infra_nodes=3
-export worker_nodes=2
+export worker_nodes=3
 export label='lab: ocp-cns'
 for id in $(seq -w 01 $size); do
   name=user$id
