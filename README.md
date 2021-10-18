@@ -25,3 +25,12 @@ configure cluster for htpass using ACM policies
 add user to each instance for a user with cluster-admin role with ACM
 
 share credentials with workshop participants
+
+# Build and push workshop image
+```shell
+cd openshift-cns-testdrive
+export QUAY_USER=<myusername>
+podman build -t quay.io/${QUAY_USER}/lab-ocp-cns:latest .
+
+podman push quay.io/${QUAY_USER}/lab-ocp-cns:latest
+```
