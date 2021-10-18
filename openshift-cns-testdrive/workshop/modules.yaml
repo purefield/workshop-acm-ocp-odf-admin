@@ -31,14 +31,13 @@ modules:
     name: Cluster Resource Quotas
   taints-and-tolerations:
     name: Taints and Tolerations
-  windows-containers:
-    name: Windows Containers
 config:
     template_engine: liquid.js  
     vars:
       - name: SSH_PASSWORD
       - name: SSH_USERNAME
       - name: ENVIRONMENT
+      - name: CLUSTER_NAME
         value: "Amazon Web Services"
       - name: API_URL
       - name: MASTER_URL

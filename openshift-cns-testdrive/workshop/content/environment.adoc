@@ -10,7 +10,7 @@ following:
 
 * 3 master nodes
 * 3 worker nodes
-* 1 bastion host
+* 3 infrastructure nodes
 
 link:https://github.com/openshift-labs/workshop-dashboard[Homeroom] is a
 solution that provides this integrated lab guide, terminal, and web console

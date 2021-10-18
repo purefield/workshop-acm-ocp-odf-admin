@@ -1,46 +1,9 @@
-## Installation and Verification
+## Installation/Cluster Provisioning Verification
 
-The scope of the new installer-provisioned infrastructure (IPI) OpenShift 4
-installation is purposefully narrow. It is designed for simplicity and
-ensured success. Many of the items and configurations that were previously
-handled by the installer are now expected to be "Day 2" operations, performed
-just after the installation of the control plane and basic workers completes.
-The installer provides a guided experience for provisioning the cluster on a
-particular platform.
-
-This IPI installation has already been performed for you, and the cluster is
-in its basic, default state.
+Cluster provisioning has already been performed for you through Advanced Cluster Manager, and the cluster is in its basic, default state.
 
 ### Logging in
-To inspect the cluster installation, you can simply SSH to the bastion host where it was installed on like so:
-
-[source,bash,role="execute"]
-----
-ssh -l {{ SSH_USERNAME }} {{ BASTION_FQDN }} -o ServerAliveInterval=120
-----
-
-Here is your ssh password:
-
-[source,bash,role="copypaste"]
-----
-{{ SSH_PASSWORD }}
-----
-
-Once you've SSH-ed into the bastion host, become the `ec2-user`:
-
-[source,bash,role="execute"]
-----
-sudo su - ec2-user
-----
-
-You'll notice that there is a 4-digit alphanumeric string (eg: f4a3) in the hostname. This
-string is your `GUID`. Since you will often use `GUID`, it makes sense to
-export it as an environment variable:
-
-[source,bash,role="execute"]
-----
-export GUID=`hostname | cut -d. -f2`
-----
+To inspect the cluster installation, you can simply us the OpenShift cli, 'oc' verify the environment.
 
 ### Master Components
 
@@ -114,68 +77,6 @@ authentication will be configured as one of the lab exercises.
 Let's do some basic tests with your installation. As an administrator, most
 of your interaction with OpenShift will be from the command line. The `oc`
 program is a command line interface that talks to the OpenShift API.
-
-#### Login to OpenShift
-When the installation completed, the installer left some artifacts that
-contain the various URLs and passwords required to access the environment.
-The installation program was run under the `ec2-user` account.
-
-[source,bash,role="execute"]
-----
-ls -al ~/cluster-$GUID
-----
-
-You'll see something like the following:
-
-----
-total 3008
-drwxrwxr-x.  4 ec2-user ec2-user     273 Nov 18 01:48 .
-drwx------. 13 ec2-user ec2-user    4096 Nov 18 02:55 ..
-drwxr-x---.  2 ec2-user ec2-user      50 Nov 18 01:15 auth
--rw-rw----.  1 ec2-user ec2-user    4197 Nov 18 01:15 install-config.yaml.bak
--rw-r-----.  1 ec2-user ec2-user     283 Nov 18 01:15 metadata.json
--rw-rw-r--.  1 ec2-user ec2-user  149886 Nov 18 01:48 .openshift_install.log
--rw-rw-r--.  1 ec2-user ec2-user   11746 Nov 18 01:48 .openshift_install.log.gz
--rw-r-----.  1 ec2-user ec2-user 2403044 Nov 18 01:21 .openshift_install_state.json
--rw-r-----.  1 ec2-user ec2-user    1576 Nov 18 01:15 terraform.aws.auto.tfvars.json
--rw-r--r--.  1 ec2-user ec2-user  168006 Nov 18 01:30 terraform.tfstate
--rw-r-----.  1 ec2-user ec2-user  318587 Nov 18 01:15 terraform.tfvars.json
-drwxr-x---.  2 ec2-user ec2-user      62 Nov 18 01:15 tls
-----
-
-The OpenShift 4 IPI installation embeds Terraform in order to create some of
-the cloud provider resources. You can see some of its outputs here. The
-important file right now is the `.openshift_install.log`. Its last few lines
-contain the relevant output to figure out how to access your environment:
-
-[source,bash,role="execute"]
-----
-tail -n10 ~/cluster-$GUID/.openshift_install.log
-----
-
-You will see something like the following::
-
-----
-time="2021-07-06T19:36:30Z" level=info msg="Install complete!"
-time="2021-07-06T19:36:30Z" level=info msg="To access the cluster as the system:admin user when using 'oc', run 'export KUBECONFIG=/home/ec2-user/cluster-pdr-5434/auth/kubeconfig'"
-time="2021-07-06T19:36:30Z" level=info msg="Access the OpenShift web-console here: https://console-openshift-console.apps.cluster-pdr-5434.pdr-5434.sandbox259.opentlc.com"
-time="2021-07-06T19:36:30Z" level=info msg="Login to the console with user: \"kubeadmin\", and password: \"SfaIH-4dBE5-A95AT-ahjjd\""
-time="2021-07-06T19:36:30Z" level=debug msg="Time elapsed per stage:"
-time="2021-07-06T19:36:30Z" level=debug msg="    Infrastructure: 8m50s"
-time="2021-07-06T19:36:30Z" level=debug msg="Bootstrap Complete: 9m10s"
-time="2021-07-06T19:36:30Z" level=debug msg=" Bootstrap Destroy: 38s"
-time="2021-07-06T19:36:30Z" level=debug msg=" Cluster Operators: 14m45s"
-time="2021-07-06T19:36:30Z" level=info msg="Time elapsed: 33m33s"
-----
-
-The installation was run as a different system user, and the artifacts folder
-is read-only mounted into your `lab-user` folder. While the installer has
-fortunately given you a convenient `export` command to run, you don't have
-write permissions to the path that it shows. The `oc` command will try to
-write to the `KUBECONFIG` file, which it can't, so you'll get errors later if you try it.
-
-Our installation process has actually already copied the config you need to
-`~/.kube/config`, so you are already logged in. Try the following:
 
 [source,bash,role="execute"]
 ----
