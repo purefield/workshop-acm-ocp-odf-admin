@@ -23,9 +23,7 @@ spec:
         from:
           kind: ImageStreamTag
           namespace: lab-ocp-cns
-          name: 'dashboard:latest'
-        lastTriggeredImage: >-
-          quay.io/geoallen/lab-sample-workshop@sha256:391f7ed8e661278c6ef45df7052f864331f9cc1c2a2a2bcdbcc71a5ee87f617f
+          name: 'dashboard:development'
   replicas: 1
   revisionHistoryLimit: 10
   test: false
