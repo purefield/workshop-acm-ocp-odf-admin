@@ -1,20 +1,20 @@
 apiVersion: v1                      
 kind: Namespace
 metadata:
-  name: adminlab
+  name: CLUSTERNAME
 ---
 apiVersion: hive.openshift.io/v1
 kind: ClusterDeployment
 metadata:
-  name: 'adminlab'
-  namespace: 'adminlab'
+  name: 'CLUSTERNAME'
+  namespace: 'CLUSTERNAME'
   labels:
     cloud: 'AWS'
     region: 'us-east-2'
     vendor: 'OpenShift'
 spec:
   baseDomain: BASE_DOMAIN
-  clusterName: 'adminlab'
+  clusterName: 'CLUSTERNAME'
   controlPlaneConfig:
     servingCertificates: {}
   installAttemptsLimit: 1
@@ -22,18 +22,18 @@ spec:
   platform:
     aws:
       credentialsSecretRef:
-        name: adminlab-aws-creds
+        name: CLUSTERNAME-aws-creds
       region: us-east-2
   provisioning:
     installConfigSecretRef:
-      name: adminlab-install-config
+      name: CLUSTERNAME-install-config
     sshPrivateKeySecretRef:
-      name: adminlab-ssh-private-key
+      name: CLUSTERNAME-ssh-private-key
     imageSetRef:
        #quay.io/openshift-release-dev/ocp-release:4.7.32-x86_64
       name: img4.7.32-x86-64-appsub
   pullSecretRef:
-    name: adminlab-pull-secret
+    name: CLUSTERNAME-pull-secret
 ---
 apiVersion: cluster.open-cluster-management.io/v1
 kind: ManagedCluster
@@ -41,21 +41,21 @@ metadata:
   labels:
     cloud: Amazon
     region: us-east-2
-    name: 'adminlab'
+    name: 'CLUSTERNAME'
     vendor: OpenShift
-    workshop: ocp-odf-admin
-  name: 'adminlab'
+    LABEL
+  name: 'CLUSTERNAME'
 spec:
   hubAcceptsClient: true
 ---
 apiVersion: hive.openshift.io/v1
 kind: MachinePool
 metadata:
-  name: adminlab-worker
-  namespace: 'adminlab'
+  name: CLUSTERNAME-worker
+  namespace: 'CLUSTERNAME'
 spec:
   clusterDeploymentRef:
-    name: 'adminlab'
+    name: 'CLUSTERNAME'
   name: worker
   platform:
     aws:
@@ -64,16 +64,34 @@ spec:
         size: 100
         type: io1
       type: m5.xlarge
-  replicas: 2
+  replicas: WORKER_NODES
 ---
 apiVersion: hive.openshift.io/v1
 kind: MachinePool
 metadata:
-  name: adminlab-infra
-  namespace: 'adminlab'
+  name: CLUSTERNAME-infra
+  namespace: 'CLUSTERNAME'
 spec:
   clusterDeploymentRef:
-    name: 'adminlab'
+    name: 'CLUSTERNAME'
+  name: infra
+  platform:
+    aws:
+      rootVolume:
+        iops: 2000
+        size: 100
+        type: io1
+      type: i3.2xlarge  # 8 vCPU, 61  GiB RAM - Storage Optimized
+  replicas: INFRA_NODES
+---
+apiVersion: hive.openshift.io/v1
+kind: MachinePool
+metadata:
+  name: CLUSTERNAME-infra
+  namespace: 'CLUSTERNAME'
+spec:
+  clusterDeploymentRef:
+    name: 'CLUSTERNAME'
   name: infra
   platform:
     aws:
@@ -87,8 +105,8 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: adminlab-pull-secret
-  namespace: 'adminlab'
+  name: CLUSTERNAME-pull-secret
+  namespace: 'CLUSTERNAME'
 stringData:
   .dockerconfigjson: |-
     DOCKER_CONFIG_JSON
@@ -97,8 +115,8 @@ type: kubernetes.io/dockerconfigjson
 apiVersion: v1
 kind: Secret
 metadata:
-  name: adminlab-install-config
-  namespace: 'adminlab'
+  name: CLUSTERNAME-install-config
+  namespace: 'CLUSTERNAME'
 type: Opaque
 data:
   # Base64 encoding of install-config yaml
@@ -107,8 +125,8 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: adminlab-ssh-private-key
-  namespace: 'adminlab'
+  name: CLUSTERNAME-ssh-private-key
+  namespace: 'CLUSTERNAME'
 stringData:
   ssh-privatekey: |-
 SSH_PRIVATE_KEY
@@ -118,8 +136,8 @@ apiVersion: v1
 kind: Secret
 type: Opaque
 metadata:
-  name: adminlab-aws-creds
-  namespace: 'adminlab'
+  name: CLUSTERNAME-aws-creds
+  namespace: 'CLUSTERNAME'
 stringData:
   aws_access_key_id: AWS_ACCESS_KEY_ID
   aws_secret_access_key: AWS_SECRET_ACCESS_KEY
@@ -127,11 +145,11 @@ stringData:
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
 metadata:
-  name: 'adminlab'
-  namespace: 'adminlab'
+  name: 'CLUSTERNAME'
+  namespace: 'CLUSTERNAME'
 spec:
-  clusterName: 'adminlab'
-  clusterNamespace: 'adminlab'
+  clusterName: 'CLUSTERNAME'
+  clusterNamespace: 'CLUSTERNAME'
   clusterLabels:
     cloud: Amazon
     vendor: OpenShift
