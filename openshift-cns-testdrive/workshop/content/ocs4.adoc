@@ -1959,7 +1959,7 @@ NOTE: Please make sure you follow the continuation prompts by pressing enter.
 
 .Example output:
 ----
-[ OK    ] Using apps.cluster-7c31.7c31.sandbox905.opentlc.com as our base domain
+[ OK    ] Using apps.{{ CLUSTER_NAME }}-ab12.7c31.sandbox905.opentlc.com as our base domain
 
 Object Bucket Demo
 
@@ -1973,7 +1973,7 @@ buildconfig.build.openshift.io "photo-album" deleted
 
  * Import dependencies and create build config
 -./demo.sh
-[ OK    ] Using apps.cluster-7c31.7c31.sandbox905.opentlc.com as our base domain
+[ OK    ] Using apps.{{ CLUSTER_NAME }}-ab12.7c31.sandbox905.opentlc.com as our base domain
 
 Object Bucket Demo
 
@@ -2107,7 +2107,7 @@ spec:
           name: photo-album
           env:
             - name: ENDPOINT_URL
-              value: 'https://s3-openshift-storage.apps.cluster-7c31.7c31.sandbox905.opentlc.com'
+              value: 'https://s3-openshift-storage.apps.{{ CLUSTER_NAME }}-ab12.7c31.sandbox905.opentlc.com'
             - name: BUCKET_NAME
               valueFrom:
                 configMapKeyRef:
@@ -2134,7 +2134,7 @@ oc get route photo-album -n demo -o jsonpath --template="http://{.spec.host}{'\n
 ----
 .Example output:
 ----
-http://photo-album.apps.cluster-7c31.7c31.sandbox905.opentlc.com
+http://photo-album.apps.{{ CLUSTER_NAME }}-ab12.7c31.sandbox905.opentlc.com
 ----
 
 Copy and paste this route into a web browser tab. 
